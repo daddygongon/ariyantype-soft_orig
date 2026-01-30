@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[ploject]
+name = "ariyantype"
+version = "0.1.0"
+description = "sample pip package"
+readme = "README.md"
+requires-python = ">=3.8"
+authors = [
+    {name = "Kaito Ariyoshi", email="kaituryu0411@gmail.com"}
+]
+
+[project.dependencies]
+requests = "*"
+
+[tool.setuptools.package.find]
+where = ["src"]
