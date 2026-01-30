@@ -1,5 +1,8 @@
 import sys
-from typing_app import TypingApp
+from .typing_app import TypingApp
+
+def main():
+    TypingApp().run(sys.argv[1:])
 
 if __name__ == "__main__":
-    TypingApp().run(sys.argv[1:])
+    main()

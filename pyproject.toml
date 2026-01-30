@@ -1,25 +1,24 @@
 [build-system]
-requires = ["setuptools>=61.0"]
+requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
-[project]  # <- 修正: ploject から project へ
+[project]
 name = "ariyantype"
 version = "0.1.0"
 description = "sample pip package"
 readme = "README.md"
 requires-python = ">=3.8"
-authors = [
-    {name = "Kaito Ariyoshi", email="kaituryu0411@gmail.com"}
-]
+authors = [{name = "Kaito Ariyoshi", email="kaituryu0411@gmail.com"}]
 
-# ここを修正: セクションヘッダーではなく、project内のキーとして配列で書く
 dependencies = [
-    "requests"
+    "matplotlib",
 ]
 
 [project.scripts]
-ariyantype = "ariyantype.main:main"
+ariyantype = "ariyantype.typing_main:main"
 
-[tool.setuptools.packages.find] # <- 補足: packages (複数形) が一般的です
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
 where = ["src"]
-

@@ -1,0 +1,2 @@
+[console_scripts]
+ariyantype = ariyantype.typing_main:main

@@ -2,12 +2,12 @@ import argparse
 
 from pathlib import Path
 
-from data_manager import DataManager
-from data_extractor import DataExtractor
-from training_logger import Logger
-from skill_checker import SkillChecker
-from typing_session import TypingSession
-from plotter import Plotter
+from .data_manager import DataManager
+from .data_extractor import DataExtractor
+from .training_logger import Logger
+from .skill_checker import SkillChecker
+from .typing_session import TypingSession
+from .plotter import Plotter
 
 
 class TypingApp:

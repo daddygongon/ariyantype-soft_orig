@@ -1,0 +1,11 @@
+Metadata-Version: 2.4
+Name: ariyantype
+Version: 0.1.0
+Summary: sample pip package
+Author-email: Kaito Ariyoshi <kaituryu0411@gmail.com>
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: matplotlib
+
+#ariyantype
+sample pip package
