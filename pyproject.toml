@@ -1,24 +1,50 @@
 [build-system]
-requires = ["setuptools>=61.0", "wheel"]
+requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
+
 
 [project]
 name = "ariyantype"
 version = "0.1.0"
-description = "sample pip package"
+description = "A class-based typing practice software for research on software design"
 readme = "README.md"
-requires-python = ">=3.8"
-authors = [{name = "Kaito Ariyoshi", email="kaituryu0411@gmail.com"}]
+requires-python = ">=3.9"
+
+authors = [
+  { name = "Kaito Ariyoshi" }
+]
+
+license = { text = "MIT" }
+
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Operating System :: OS Independent",
+  "Intended Audience :: Education",
+  "Topic :: Education",
+  "Topic :: Software Development :: Object Oriented"
+]
 
 dependencies = [
-    "matplotlib",
+  "matplotlib",
+  "platformdirs"
 ]
+
 
 [project.scripts]
 ariyantype = "ariyantype.typing_main:main"
 
+
 [tool.setuptools]
 package-dir = {"" = "src"}
 
+
 [tool.setuptools.packages.find]
 where = ["src"]
+
+
+[tool.setuptools.package-data]
+ariyantype = [
+  "data/*.txt",
+  "data/*.list"
+]

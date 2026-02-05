@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Optional
 
 import matplotlib
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 from matplotlib import font_manager
@@ -158,6 +159,7 @@ class Plotter:
 
         out = self._save_or_default(save_path, "wpm_over_time.png")
         plt.savefig(str(out))
+        print(f"[saved] {out}")
         plt.close()
 
     def plot_training_scores(self, training_log_path: Path, save_path: Optional[Path] = None) -> None:
@@ -202,6 +204,7 @@ class Plotter:
 
         out = self._save_or_default(save_path, "training_scores.png")
         plt.savefig(str(out))
+        print(f"[saved] {out}")
         plt.close()
 
     def plot_practiced_steps(self, training_log_path: Path, save_path: Optional[Path] = None) -> None:

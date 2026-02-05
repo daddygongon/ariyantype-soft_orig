@@ -1,0 +1,96 @@
+@startuml uml
+skinparam dpi 180
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam roundcorner 15
+skinparam linetype ortho
+
+' =========================================================
+' Package structure (pip化を意識して src/ariyantype を明示)
+' =========================================================
+package "project root" {
+  package "src" {
+    package "ariyantype (package)" as PKG {
+
+      class TypingMain <<entry>> {
+        +main(argv)
+      }
+
+      class TypingApp <<controller>> {
+        -dm : DataManager
+        -plotter : Plotter
+        --
+        +app(argv)
+      }
+
+      class DataManager <<core>> {
+        -base_dir : Path
+        -text_data_dir : Path
+        -training_log : Path
+        -speed_log : Path
+        --
+        +read_text_lines(filename)
+        +save_training_log(file_name, total_words, total_time)
+        +save_speed_log(words, total_time)
+        +get_practiced_steps()
+      }
+
+      class DataExtractor {
+        -dm : DataManager
+        --
+        +extract(path)
+      }
+
+      class Logger {
+        -dm : DataManager
+        --
+        +print_Log()
+        +print_history()
+      }
+
+      class SkillChecker {
+        -dm : DataManager
+        -words : list
+        --
+        +skillcheck()
+      }
+
+      class TypingSession {
+        -dm : DataManager
+        -file_name : str
+        --
+        +run()
+      }
+
+      class Plotter {
+        -out_dir : Path
+        --
+        +plot_speed_log()
+        +plot_training_scores()
+        ' +plot_practiced_steps()  ' ※必要なら有効化
+      }
+    }
+  }
+}
+
+' =========================================================
+' Relationships (あなたのラベルの付け方に寄せる)
+' =========================================================
+TypingMain --> TypingApp : 起動
+
+TypingApp *-- DataManager
+TypingApp *-- Plotter
+
+TypingApp ..> DataExtractor : -d
+TypingApp ..> Logger : -r / -H
+TypingApp ..> SkillChecker : -c
+TypingApp ..> TypingSession : STEP指定
+TypingApp ..> Plotter : --plot
+
+DataExtractor --> DataManager
+Logger --> DataManager
+SkillChecker --> DataManager
+TypingSession --> DataManager
+Plotter ..> DataManager : log参照
+
+@enduml

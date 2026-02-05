@@ -6,7 +6,8 @@ class TypingSession:
     def __init__(self, data_manager, file_name):
         self.dm = data_manager
         self.file_name = file_name
-        self.lines = self.dm.load_lines(self.dm.get_file_path(file_name))
+        self.lines = self.dm.read_text_lines(file_name)
+
         self.time_limit = 60
 
     def counter(self, expected, typed):

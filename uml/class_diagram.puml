@@ -1,0 +1,86 @@
+@startuml uml
+skinparam dpi 180
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam roundcorner 15
+skinparam linetype ortho
+
+package "ariyantype" {
+
+  class TypingMain <<entry>> {
+    +main()
+  }
+
+  class TypingApp <<controller>> {
+    -dm : DataManager
+    -plotter : Plotter
+    --
+    +run(argv)
+  }
+
+  class DataManager <<core>> {
+    -base_dir : Path
+    -text_data_dir : Path
+    -training_log : Path
+    -speed_log : Path
+    --
+    +read_text_lines(name)
+    +save_training_log(...)
+    +save_speed_log(...)
+    +get_practiced_steps()
+  }
+
+  class DataExtractor {
+    -dm : DataManager
+    --
+    +extract(path)
+  }
+
+  class Logger {
+    -dm : DataManager
+    --
+    +print_log()
+    +print_history()
+  }
+
+  class SkillChecker {
+    -dm : DataManager
+    -words : list
+    --
+    +run()
+  }
+
+  class TypingSession {
+    -dm : DataManager
+    -file_name : str
+    --
+    +run()
+  }
+
+  class Plotter {
+    -out_dir : Path
+    --
+    +plot_speed_log()
+    +plot_training_scores()
+    +plot_practiced_steps()
+  }
+}
+
+TypingMain --> TypingApp : 起動
+
+TypingApp *-- DataManager
+TypingApp *-- Plotter
+
+TypingApp ..> DataExtractor : -d
+TypingApp ..> Logger : -r / -H
+TypingApp ..> SkillChecker : -c
+TypingApp ..> TypingSession : STEP指定
+TypingApp ..> Plotter : --plot
+
+DataExtractor --> DataManager
+Logger --> DataManager
+SkillChecker --> DataManager
+TypingSession --> DataManager
+
+@enduml
+

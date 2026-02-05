@@ -1,0 +1,15 @@
+@startuml uml
+class DataManager {
+  - base_dir: Path
+  - text_data_dir: Path
+  - training_log: Path
+  - speed_log: Path
+
+  + __init__(app_name: str = "ariyantype")
+  + read_text_lines(filename: str): list[str]
+  - _read_lines_from_path(filepath: Path): list[str]
+  + save_training_log(file_name, total_words, total_time)
+  + save_speed_log(words, total_time)
+  + get_practiced_steps(): set
+}
+@enduml
