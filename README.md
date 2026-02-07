@@ -7,18 +7,19 @@
 ただし、fish は bash/zsh と文法が異なるため、以下の手順に従ってください。(bash等の場合お調べ下さい)
 
 # 前提
-OS ： Linux / WSL（Ubuntu）
-シェル ： fish
-Python ： 3.9 以上
+- OS ： Linux / WSL（Ubuntu）
+- シェル ： fish
+- Python ： 3.9 以上
 
 # セットアップ（fish）
+``` bash
 > git clone https://github.com/yourname/ariyantype.git
 > cd ariyantype
 > python3 -m venv .venv
 > source .venv/bin/activate.fish
 > python -m pip install -U pip setuptools wheel
 > python -m pip install -e .
-
+```
 # 実行方法（fish）
 > ariyantype
 > ariyantype -h
