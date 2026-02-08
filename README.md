@@ -9,10 +9,11 @@
 # 前提
 - OS ： Linux / WSL（Ubuntu）
 - シェル ： fish
-- Python ： 3.9 以上
+- Python ： 3.8 以上
 
 # セットアップ（fish）
 ``` bash
+> rm -rf /Users/bob/git_hub/ariyantype/.venv
 > git clone https://github.com/yourname/ariyantype.git
 > cd ariyantype
 > python3 -m venv .venv
