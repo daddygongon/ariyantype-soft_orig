@@ -21,6 +21,9 @@
 > python -m pip install -U pip setuptools wheel
 > python -m pip install -e .
 ```
+#データのダウンロード
+パッケージのインストールが完了できればこちらの[URL](https://kwanseio365-my.sharepoint.com/:u:/g/personal/ifu81383_nuc_kwansei_ac_jp/IQBSS-jAWP16SJiUxjZMDCxhAYEuir8ryFpKOHtWwhpWoy0?e=MvIeWo)からdata.zipをダウンロードしてください。 
+
 # 実行方法（fish）
 > ariyantype
 > ariyantype -h
