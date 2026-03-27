@@ -1,0 +1,10 @@
+@startuml uml
+title DataManager._read_lines_from_path() の処理
+
+start
+:filepath を open(encoding="utf-8");
+:1行ずつ読み込む;
+:strip()して空行を除外;
+:list[str] として返す;
+stop
+@enduml

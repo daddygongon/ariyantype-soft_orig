@@ -1,0 +1,35 @@
+@startuml uml
+title DataManager.get_practiced_steps() の処理
+
+start
+:steps = set() を用意;
+
+if (training_data.txt が存在する？) then (no)
+  :空のsetを返す;
+  stop
+else (yes)
+  :training_data.txt を開く;
+endif
+
+repeat
+:1行読み込む;
+:カンマで分割(parts);
+
+if (partsが2列未満？) then (yes)
+  :continue;
+else (no)
+  :file_name = parts[1];
+endif
+
+if (file_nameがSTEP-xx.txt形式？) then (yes)
+  :数字部分(xx)を抽出;
+  if (xxが数字？) then (yes)
+    :stepsにint(xx)を追加;
+  endif
+endif
+
+repeat while (次の行がある？)
+
+:steps を返す;
+stop
+@enduml

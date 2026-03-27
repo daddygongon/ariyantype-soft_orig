@@ -1,0 +1,29 @@
+@startuml uml
+title ログ可視化の処理フロー（1と5）
+
+start
+:ログファイルを読む;
+:各行を split(",");
+if (形式が不正?) then (yes)
+  :skip;
+else (no)
+  :日時を parse;
+  :値(WPM or 正答数)を算出;
+endif
+repeat while (次の行)
+
+:日付単位に集約;
+if (WPM) then (平均)
+  :日別平均を計算;
+else (スコア)
+  :日別合計を計算;
+endif
+
+:直近90日に絞る;
+:Matplotlibで図を作る;
+:日付軸を日単位で整形;
+:PNGとして保存(savefig);
+:closeして終了;
+
+stop
+@enduml

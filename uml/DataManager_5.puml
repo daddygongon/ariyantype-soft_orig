@@ -1,0 +1,11 @@
+@startuml uml
+title DataManager.save_speed_log() の処理
+
+start
+:現在時刻を取得(now);
+:total_characters = sum(len(w) for w in words);
+:speed_data.txt を追記モードで開く;
+:「日時, 単語数, 時間, 文字数」を1行書き込む;
+:ファイルを閉じる;
+stop
+@enduml

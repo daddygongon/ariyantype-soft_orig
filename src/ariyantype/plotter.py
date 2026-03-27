@@ -117,7 +117,7 @@ class Plotter:
         return save_path if save_path is not None else (self.out_dir / default_name)
 
     def plot_speed_log(self, speed_log_path: Path, save_path: Optional[Path] = None) -> None:
-        """speed_log を読み、日別平均WPMを（直近3か月・1日単位で）プロットする。"""
+        
         if not speed_log_path.exists():
             raise FileNotFoundError(f"speed log not found: {speed_log_path}")
 
@@ -143,7 +143,7 @@ class Plotter:
         if not times:
             raise RuntimeError("no data in speed log")
 
-        # 日別平均へ集約 → 直近90日へ絞り込み
+        # 日別平均へ集約 ... 直近90日へ絞り込み
         days, daily_wpms = self._group_by_day_average(times, wpms)
         days, daily_wpms = self._filter_last_n_days(days, daily_wpms, 90)
 
@@ -205,40 +205,4 @@ class Plotter:
         out = self._save_or_default(save_path, "training_scores.png")
         plt.savefig(str(out))
         print(f"[saved] {out}")
-        plt.close()
-
-    def plot_practiced_steps(self, training_log_path: Path, save_path: Optional[Path] = None) -> None:
-        """training_log から STEP-xx の出現回数を棒グラフで表示する。"""
-        if not training_log_path.exists():
-            raise FileNotFoundError(f"training log not found: {training_log_path}")
-
-        counts = {}
-        with training_log_path.open(encoding="utf-8") as f:
-            for line in f:
-                parts = line.strip().split(",")
-                if len(parts) < 2:
-                    continue
-                file_name = parts[1]
-                if file_name.startswith("STEP-") and file_name.endswith(".txt"):
-                    num_part = file_name[5:-4]
-                    if num_part.isdigit():
-                        n = int(num_part)
-                        counts[n] = counts.get(n, 0) + 1
-
-        if not counts:
-            raise RuntimeError("no STEP data in training log")
-
-        xs = sorted(counts.keys())
-        ys = [counts[x] for x in xs]
-
-        plt.figure(figsize=(10, 4))
-        plt.bar(xs, ys)
-        plt.xlabel("STEP")
-        plt.ylabel("練習回数")
-        plt.title("Practiced STEP counts")
-        plt.grid(axis="y")
-        plt.tight_layout()
-
-        out = self._save_or_default(save_path, "practiced_steps.png")
-        plt.savefig(str(out))
         plt.close()

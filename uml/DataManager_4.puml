@@ -1,0 +1,10 @@
+@startuml uml
+title DataManager.save_training_log() の処理
+
+start
+:現在時刻を取得(now);
+:training_data.txt を追記モードで開く;
+:「日時, ファイル名, 単語数, 時間」を1行書き込む;
+:ファイルを閉じる;
+stop
+@enduml

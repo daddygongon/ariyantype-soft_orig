@@ -1,0 +1,24 @@
+@startuml uml
+title DataManager.read_text_lines() の処理
+
+start
+:user_path = text_data_dir / filename;
+
+if (ユーザー側にファイルが存在する？) then (yes)
+  :_read_lines_from_path(user_path) を呼ぶ;
+  :行リストを返す;
+  stop
+else (no)
+  :パッケージ内 data/filename を読む;
+  if (読み込み成功？) then (yes)
+    :splitlines() で分割;
+    :空行を除外して返す;
+    stop
+  else (no)
+    :ファイルが存在しない旨を表示;
+    :sys.exit(1)で終了;
+    stop
+  endif
+endif
+
+@enduml

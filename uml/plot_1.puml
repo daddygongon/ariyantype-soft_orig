@@ -1,0 +1,43 @@
+@startuml uml
+title Plotter.py の全体構成（1〜4を俯瞰）
+
+class Plotter {
+  - out_dir: Path
+  + plot_speed_log(speed_log_path: Path, save_path: Path? = None): void
+  + plot_training_scores(training_log_path: Path, save_path: Path? = None): void
+  + plot_practiced_steps(training_log_path: Path, save_path: Path? = None): void
+  --
+  # _parse_datetime(s: str): datetime
+  # _group_by_day_average(times, values): (days, avgs)
+  # _group_by_day_sum(times, values): (days, sums)
+  # _filter_last_n_days(days, values, n_days=90): (days, values)
+  # _set_daily_xaxis(interval=1): void
+  # _save_or_default(save_path: Path?, default_name: str): Path
+}
+
+class "Python stdlib" as Std {
+  datetime
+  pathlib.Path
+  collections.defaultdict
+  warnings
+}
+
+package "Matplotlib" as MPL {
+  class matplotlib
+  class "pyplot (plt)" as plt
+  class "dates (mdates)" as mdates
+  class "font_manager" as font_manager
+}
+
+Plotter ..> Std : ログ解析/日付処理/集計/保存先管理
+Plotter ..> plt : plot(), bar(), savefig(), close()
+Plotter ..> mdates : DayLocator / DateFormatter
+Plotter ..> font_manager : 利用可能フォント探索
+matplotlib ..> plt : backend設定(Agg)
+
+note right of matplotlib
+CUI/WSL向け: Aggバックエンドで
+show()せずPNG保存
+end note
+
+@enduml

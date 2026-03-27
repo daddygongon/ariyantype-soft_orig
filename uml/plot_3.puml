@@ -1,0 +1,21 @@
+@startuml uml
+title 日本語フォント自動設定（4）
+
+start
+:候補フォント名リストを準備;
+:font_manager から\n利用可能フォントを取得;
+if (候補が見つかる?) then (yes)
+  :rcParams["font.family"] を設定;
+  :rcParams["axes.unicode_minus"]=False;
+  stop
+else (no)
+  if (部分一致で選べる?) then (yes)
+    :近いフォント名を採用;
+    :rcParams を設定;
+    stop
+  else (no)
+    :warnings.warn(文字化け可能性);
+    stop
+  endif
+endif
+@enduml

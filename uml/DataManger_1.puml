@@ -1,0 +1,17 @@
+@startuml uml
+title DataManager.__init__() の処理
+
+start
+:app_name を受け取る;
+:platformdirs.user_data_dir(app_name)で保存先を決定;
+:base_dir を Path化;
+:base_dir.mkdir(parents=True, exist_ok=True);
+
+:text_data_dir = base_dir / "text_data";
+:training_log = base_dir / "training_data.txt";
+:speed_log = base_dir / "speed_data.txt";
+
+:text_data_dir.mkdir(parents=True, exist_ok=True);
+
+stop
+@enduml
