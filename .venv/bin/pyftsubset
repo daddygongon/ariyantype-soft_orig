@@ -1,8 +1,6 @@
-#!/home/kaito/ariyantype/.venv/bin/python3
-# -*- coding: utf-8 -*-
-import re
+#!/Users/bob/git_hub/ariyantype-soft_orig/.venv/bin/python
 import sys
 from fontTools.subset import main
 if __name__ == '__main__':
-    sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
+    sys.argv[0] = sys.argv[0].removesuffix('.exe')
     sys.exit(main())
