@@ -26,7 +26,9 @@
 
 # 実行方法（fish）
 > source .venv/bin/activate.fish
+
 > ariyantype
+
 > ariyantype -h
 
 # 各機能の実行例
