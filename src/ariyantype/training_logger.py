@@ -16,7 +16,7 @@ class Logger:
                 print(f.read())
         else:
             print("データなし")
-    
+
     def print_history(self):
         """Shunkuntype風：STEP練習履歴を整形して表示"""
 
@@ -24,29 +24,31 @@ class Logger:
 
         groups = [
             ("frdejuki", range(1, 5)),
-            ("tgyh",     range(5, 10)),
-            ("vbc",      range(10, 15)),
-            ("mn,",      range(15, 20)),
-            ("consol",   range(20, 25)),
-            ("swx",      range(25, 30)),
-            ("lo.",      range(30, 35)),
-            ("aqz",      range(35, 40)),
-            (";p",       range(40, 46)),
-            ("consol",   range(46, 51)),
-            ("ex01",     range(51, 56)),
-            ("ex02",     range(56, 61)),
-            ("ex03",     range(61, 66)),
-            ("ex04",     range(66, 71)),
-            ("ex05",     range(71, 76)),
-            ("ex06",     range(76, 81)),
-            ("ex07",     range(81, 86)),
-            ("ex08",     range(86, 91)),
-            ("ex09",     range(91, 96)),
-            ("ex10",     range(96, 98)),
+            ("tgyh", range(5, 10)),
+            ("vbc", range(10, 15)),
+            ("mn,", range(15, 20)),
+            ("consol", range(20, 25)),
+            ("swx", range(25, 30)),
+            ("lo.", range(30, 35)),
+            ("aqz", range(35, 40)),
+            (";p", range(40, 46)),
+            ("consol", range(46, 51)),
+            ("ex01", range(51, 56)),
+            ("ex02", range(56, 61)),
+            ("ex03", range(61, 66)),
+            ("ex04", range(66, 71)),
+            ("ex05", range(71, 76)),
+            ("ex06", range(76, 81)),
+            ("ex07", range(81, 86)),
+            ("ex08", range(86, 91)),
+            ("ex09", range(91, 96)),
+            ("ex10", range(96, 98)),
         ]
 
-        print("hour | contents | steps           | practiced")
+        # ヘッダーを17文字幅に合わせてフォーマットで出力
+        print(f"{'hour':>4} | {'contents':<8} | {'steps':<17} | practiced")
         for hour, (label, step_range) in enumerate(groups):
             steps_str = ",".join(str(s) for s in step_range)
             practiced_str = ",".join(str(s) for s in step_range if s in practiced)
-            print(f"{hour:4d} | {label:<8} | {steps_str:<15} | {practiced_str}")
+            # steps_strの幅指定を :<15 から :<17 に変更
+            print(f"{hour:4d} | {label:<8} | {steps_str:<17} | {practiced_str}")

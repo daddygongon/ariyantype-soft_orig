@@ -1,12 +1,18 @@
 import time, random
 
+
 class SkillChecker:
     def __init__(self, data_manager):
         self.dm = data_manager
         self.words = self.dm.read_text_lines("word.list")
 
-    def skillcheck(self):  
+    def skillcheck(self):
         selected = random.sample(self.words, min(20, len(self.words)))
+        print(
+            " q \\ w \\ e \\ r t \\ y u \\ i \\ o \\ p\n"
+            "  a \\ s \\ d \\ f g \\ h j \\ k \\ l \\ ; enter\n"
+            "sh z \\ x \\ c \\ v b \\ n m \\ , \\ . \\  shift\n"
+        )
         print("スキルチェックを開始します。Enterでスタート")
         input()
         start = time.time()
