@@ -1,4 +1,0 @@
-I shall have to make this form so that
-it will go into a mailer with a name on it;
-and then we will plan the other form to fit
-into this smaller one.
