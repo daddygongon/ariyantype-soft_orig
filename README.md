@@ -13,24 +13,23 @@
 
 # セットアップ（fish）
 ``` bash
-> rm -rf /Users/bob/git_hub/ariyantype/.venv
-> git clone https://github.com/yourname/ariyantype.git
+> git clone git@github.com:daddygongon/ariyantype-soft_orig.git
 > cd ariyantype
+> rm -rf .venv
 > python3 -m venv .venv
 > source .venv/bin/activate.fish
 > python -m pip install -U pip setuptools wheel
 > python -m pip install -e .
 ```
---データのダウンロード: 
-パッケージのインストールが完了できればこちらの[URL](https://kwanseio365-my.sharepoint.com/:u:/g/personal/ifu81383_nuc_kwansei_ac_jp/IQBSS-jAWP16SJiUxjZMDCxhAYEuir8ryFpKOHtWwhpWoy0?e=MvIeWo)からdata.zipをダウンロードしてください。 
+- データのダウンロード: 
+src/ariyantype/srcディレクトリがない場合は，こちらの[URL](https://kwanseio365-my.sharepoint.com/:u:/g/personal/ifu81383_nuc_kwansei_ac_jp/IQBSS-jAWP16SJiUxjZMDCxhAYEuir8ryFpKOHtWwhpWoy0?e=MvIeWo)からdata.zipをダウンロードして，mvしてください．
 
 # 実行方法（fish）
+``` bash
 > source .venv/bin/activate.fish
-
 > ariyantype
-
 > ariyantype -h
-
+```
 # 各機能の実行例
 - STEP 練習（例：STEP-1）
     > ariyantype 1

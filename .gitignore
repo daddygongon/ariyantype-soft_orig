@@ -1,6 +1,7 @@
 /tmp
 .DS_Store
-data/
+.venv
+.ariyantype_data
 /.bundle/
 /.yardoc
 /_yardoc/
