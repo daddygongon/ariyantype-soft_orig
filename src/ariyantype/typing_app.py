@@ -1,4 +1,5 @@
 import argparse
+import sys
 
 from pathlib import Path
 
@@ -52,10 +53,24 @@ class TypingApp:
             SkillChecker(self.dm).skillcheck()
         elif args.plot_check:
             out = Path(args.out) if args.out else None
-            self.plotter.plot_speed_log(self.dm.speed_log, out)
+            try:
+                self.plotter.plot_speed_log(self.dm.speed_log, out)
+            except FileNotFoundError as e:
+                print(f"エラー: {e}")
+                print(
+                    "正しいプロジェクトのルートディレクトリに移動してから再度実行してください。"
+                )
+                sys.exit(1)
         elif args.plot_training:
             out = Path(args.out) if args.out else None
-            self.plotter.plot_training_scores(self.dm.training_log, out)
+            try:
+                self.plotter.plot_training_scores(self.dm.training_log, out)
+            except FileNotFoundError as e:
+                print(f"エラー: {e}")
+                print(
+                    "正しいプロジェクトのルートディレクトリに移動してから再度実行してください。"
+                )
+                sys.exit(1)
         elif args.step and args.step.isdigit():
             file_name = f"STEP-{args.step}.txt"
             TypingSession(self.dm, file_name).run()
