@@ -7,7 +7,7 @@ class TypingSession:
     def __init__(self, data_manager, file_name):
         self.dm = data_manager
         self.file_name = file_name
-        self.lines = self.dm.read_text_lines(file_name)
+        self.lines = self.dm.read_text_lines(self.file_name)
 
         self.time_limit = 60
 
@@ -81,11 +81,9 @@ class TypingSession:
             print(f"【 今回の練習キー: {target_chars} 】")
 
         print(f"STEP {self.file_name} を開始します。")
-
-        # 練習テキストの最初の2行を取得して表示
-        preview_lines = self.dm.read_text_lines(self.file_name)
-        for line in preview_lines[:2]:
+        for line in self.lines:
             print(line)
+        print("-" * 30)
 
         input("Enterでスタート")
 
