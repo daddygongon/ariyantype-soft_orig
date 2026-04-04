@@ -1,4 +1,4 @@
-#!/home/bob/ariyantype-soft_orig/.venv/bin/python
+#!/Users/bob/git_hub/ariyantype-soft_orig/.venv/bin/python
 import sys
 from numpy.f2py.f2py2e import main
 if __name__ == '__main__':
