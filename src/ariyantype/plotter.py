@@ -13,46 +13,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
-from matplotlib import font_manager
 
-
-# 日本語フォントの自動設定（ここは最小変更でそのまま）
-def _setup_japanese_font():
-    candidates = [
-        "Noto Sans CJK JP",
-        "Noto Sans JP",
-        "IPAexGothic",
-        "IPAPGothic",
-        "TakaoPGothic",
-        "TakaoGothic",
-        "Yu Gothic",
-        "Meiryo",
-        "Hiragino Maru Gothic Pro",
-        "Hiragino Kaku Gothic ProN",
-        "Arial Unicode MS",
-    ]
-
-    available = {f.name for f in font_manager.fontManager.ttflist}
-    for name in candidates:
-        if name in available:
-            matplotlib.rcParams["font.family"] = name
-            matplotlib.rcParams["axes.unicode_minus"] = False
-            return name
-
-    for f in font_manager.fontManager.ttflist:
-        n = f.name
-        if any(k in n for k in ("IPA", "Noto", "Takao", "Meiryo", "Yu ", "Hiragino")):
-            matplotlib.rcParams["font.family"] = n
-            matplotlib.rcParams["axes.unicode_minus"] = False
-            return n
-
-    warnings.warn(
-        "日本語フォントが見つかりません。プロットの日本語ラベルが化ける可能性があります。"
-    )
-    return None
-
-
-_setup_japanese_font()  # モジュール読み込み時に一度だけ設定
 
 
 class Plotter:
@@ -71,27 +32,7 @@ class Plotter:
         except Exception:
             return datetime.datetime.now()
 
-    @staticmethod
-    def _group_by_day_average(times, values):
-        """datetime配列を日付単位でまとめ、平均を返す"""
-        bucket = defaultdict(list)
-        for t, v in zip(times, values):
-            bucket[t.date()].append(v)
 
-        days = sorted(bucket.keys())
-        avgs = [sum(vs) / len(vs) for vs in (bucket[d] for d in days)]
-        return days, avgs
-
-    @staticmethod
-    def _group_by_day_sum(times, values):
-        """datetime配列を日付単位でまとめ、合計を返す"""
-        bucket = defaultdict(list)
-        for t, v in zip(times, values):
-            bucket[t.date()].append(v)
-
-        days = sorted(bucket.keys())
-        sums = [sum(vs) for vs in (bucket[d] for d in days)]
-        return days, sums
 
     def _filter_last_n_days(self, days, values, n_days: int = 90):
         """直近 n_days 分のみ残す（days は datetime.date の配列想定）"""
@@ -130,7 +71,7 @@ class Plotter:
             elif system == "Windows":  # Windows
                 subprocess.call(["cmd", "/c", "start", "", str(file_path)])
             else:  # Linux (Ubuntu, WSL etc.)
-                subprocess.call(["xdg-open", str(file_path)])
+                subprocess.call([str(Path.home() / "bin/open"), str(file_path)])
         except Exception as e:
             print(f"画像を開けませんでした: {e}")
 
@@ -173,7 +114,7 @@ class Plotter:
                 filtered_durations.append(d)
 
         if not filtered_times:
-            print("直近3ヶ月のスキルチェックデータがありません。")
+            print("No skill check data in the last 3 months.")
             return
 
         plt.figure(figsize=(10, 4))
@@ -185,13 +126,13 @@ class Plotter:
             label="Time [s]",
         )
 
-        # X軸を「月/日 時:分」の形式で細かく表示
+        # X-axis: MM/DD HH:MM format
         ax = plt.gca()
         ax.xaxis.set_major_formatter(mdates.DateFormatter("%m/%d %H:%M"))
         plt.xticks(rotation=45, ha="right")
 
-        plt.xlabel("日時")
-        plt.ylabel("所要時間 (秒)")
+        plt.xlabel("DateTime")
+        plt.ylabel("Duration (s)")
         plt.title("Skill Check: Time Taken (Per Session, last 3 months)")
         plt.grid(True)
         plt.tight_layout()
@@ -240,7 +181,7 @@ class Plotter:
                 filtered_durations.append(d)
 
         if not filtered_times:
-            print("直近3ヶ月のトレーニングデータがありません。")
+            print("No training data in the last 3 months.")
             return
 
         # 所要時間を足し合わせて「積算時間」にする
@@ -255,11 +196,11 @@ class Plotter:
         max_duration = max(filtered_durations)
         if max_duration >= 3600:
             filtered_durations = [d / 3600 for d in filtered_durations]
-            y_label = "積算時間 (時間)"
+            y_label = "Cumulative Time (hours)"
             legend_label = "Cumulative Time [h]"
         else:
             filtered_durations = [d / 60 for d in filtered_durations]
-            y_label = "積算時間 (分)"
+            y_label = "Cumulative Time (minutes)"
             legend_label = "Cumulative Time [m]"
 
         plt.figure(figsize=(10, 4))
@@ -276,7 +217,7 @@ class Plotter:
         ax.xaxis.set_major_formatter(mdates.DateFormatter("%m/%d %H:%M"))
         plt.xticks(rotation=45, ha="right")
 
-        plt.xlabel("日時")
+        plt.xlabel("date and time")
         plt.ylabel(y_label)
         plt.title("Training Time (Per Session, last 3 months)")
         plt.grid(True)

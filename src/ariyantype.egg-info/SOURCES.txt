@@ -15,6 +15,7 @@ src/ariyantype.egg-info/dependency_links.txt
 src/ariyantype.egg-info/entry_points.txt
 src/ariyantype.egg-info/requires.txt
 src/ariyantype.egg-info/top_level.txt
+src/ariyantype/_stack_1st_260402/data_manager.py
 src/ariyantype/data/STEP-1.txt
 src/ariyantype/data/STEP-10.txt
 src/ariyantype/data/STEP-11.txt
@@ -113,5 +114,4 @@ src/ariyantype/data/STEP-95.txt
 src/ariyantype/data/STEP-96.txt
 src/ariyantype/data/STEP-97.txt
 src/ariyantype/data/data.txt
-src/ariyantype/data/training_date.txt
 src/ariyantype/data/word.list

@@ -1,4 +1,4 @@
-#!/Users/bob/git_hub/ariyantype-soft_orig/.venv/bin/python
+#!/home/bob/ariyantype-soft_orig/.venv/bin/python
 import sys
 from numpy._configtool import main
 if __name__ == '__main__':
