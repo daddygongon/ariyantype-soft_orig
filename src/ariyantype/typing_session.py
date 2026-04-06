@@ -21,12 +21,12 @@ class TypingSession:
             ("tgyh", range(5, 10)),
             ("vbc", range(10, 15)),
             ("mn,", range(15, 20)),
-            ("consol", range(20, 25)),
+            ("mid-check", range(20, 25)),
             ("swx", range(25, 30)),
             ("lo.", range(30, 35)),
             ("aqz", range(35, 40)),
             (";p", range(40, 46)),
-            ("consol", range(46, 51)),
+            ("whole-check", range(46, 51)),
         ]
 
         target_chars = ""
@@ -51,7 +51,15 @@ class TypingSession:
         reset = "\033[0m"
         colored_kb = ""
 
-        is_consol = target_chars.startswith("consol") or target_chars.startswith("ex")
+        # mid-checkは赤字表示するため、ここから除外する
+        is_consol = target_chars.startswith("whole-check") or target_chars.startswith(
+            "ex"
+        )
+
+        # 赤字にする対象の文字を設定
+        highlight_chars = target_chars
+        if target_chars == "mid-check":
+            highlight_chars = "edcrtfgvbyuihjknm,"
 
         for line in kb_lines:
             i = 0
@@ -68,7 +76,7 @@ class TypingSession:
                 else:
                     c = line[i]
                     # consolやexではなく、ターゲット文字列に含まれる文字なら赤くする
-                    if not is_consol and c in target_chars and c not in " \\":
+                    if not is_consol and c in highlight_chars and c not in " \\":
                         colored_kb += f"{red}{c}{reset}"
                     else:
                         colored_kb += c
