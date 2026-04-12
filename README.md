@@ -13,7 +13,7 @@
 
 # セットアップ（fish）
 ``` bash
-> git clone git@github.com:daddygongon/ariyantype-soft_orig.git
+> git clone git@github.com:daddygongon/ariyantype.git
 > cd ariyantype
 > rm -rf .venv
 > python3 -m venv .venv
